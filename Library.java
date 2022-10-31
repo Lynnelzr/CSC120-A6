@@ -32,46 +32,54 @@ import java.util.Hashtable;
     /* returns true if the title appears as a key in the Libary's collection, false otherwise */
     public boolean containsTitle(String title){
     if (collection.containsKey(title)) { //check if there is key "title"
-      System.out.println("true");
+      System.out.println("Yes");
       return true;
     } else{
-      System.out.println("false");
+      System.out.println("No");
       return false;
       }
     }
-    /* returns true if the title is currently available, false otherwise */
+    /* check if the title we are finding is existing in the collecting
+     * if not, throw exception
+     * returns true if the title is currently available, false otherwise 
+     */
     public boolean isAvailable(String title){
-    if (collection.containsValue(true)){
-      System.out.println("true");
-      return true;
-    }
-    else {
-      System.out.println("false");
-      return false;
+    if (collection.containsKey(title)){
+      if (collection.get(title).equals(true)){
+        System.out.println("This book is available.");
+        return true;
       }
-    } 
-    /*prints out the entire collection in an easy-to-read way (including checkout status) */
+      else {
+        System.out.println("This book is not available.");
+        return false;
+        }
+      } 
+      else {
+        throw new RuntimeException("This book is not in our collection.");}
+    }
+    
+    /* prints out the entire collection in an easy-to-read way (including checkout status) */
     public void printCollection(){
-      System.out.println("Collection in the library: " + collection);
+      System.out.println("Collection in the library: " + collection.toString());
     } 
   
     public static void main(String[] args){
       Library myLibrary = new Library("Neilson", "7 Neilson Drive", 4);
-      myLibrary.addTitle("Jane Eyre");
-      myLibrary.addTitle("The Great Gatsby");
+      myLibrary.addTitle("Jane Eyre by Charlotte Brontë");
+      myLibrary.addTitle("The Great Gatsby by F. Scott Fitzgerald");
       myLibrary.printCollection();
-      myLibrary.removeTitle("Jane Eyre");
+      myLibrary.removeTitle("Jane Eyre by Charlotte Brontë");
       System.out.println("After remove a book.");
       myLibrary.printCollection();
-      myLibrary.checkOut("The Great Gatsby");
+      myLibrary.checkOut("The Great Gatsby by F. Scott Fitzgerald");
       System.out.println("Check out a book.");
       myLibrary.printCollection();
-      myLibrary.Return("The Great Gatsby");
+      myLibrary.Return("The Great Gatsby by F. Scott Fitzgerald");
       System.out.println("Return a book.");
       myLibrary.printCollection();
       System.out.println("Does the collection contain The Great Gatsby? ");
-      myLibrary.containsTitle("The Great Gatsby");
-      System.out.println("Is the Great Gatsby available in the collection?");
-      myLibrary.isAvailable("The Great Gatsby");
+      myLibrary.containsTitle("The Great Gatsby by F. Scott Fitzgerald");
+      System.out.println("Is the Jane Eyre available in the collection?");
+      myLibrary.isAvailable("Jane Eyre by Charlotte Brontë");
     }
   }
