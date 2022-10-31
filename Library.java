@@ -60,7 +60,9 @@ import java.util.Hashtable;
     
     /* prints out the entire collection in an easy-to-read way (including checkout status) */
     public void printCollection(){
-      System.out.println("Collection in the library: " + collection.toString());
+      collection.entrySet().forEach( entry -> {
+      System.out.println( entry.getKey() + " ( " + entry.getValue() + " ) ");
+      });
     } 
   
     public static void main(String[] args){
