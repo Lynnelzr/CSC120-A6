@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.util.Set;
 
 /* This is a stub for the Library class */
   public class Library extends Building{
@@ -60,9 +61,14 @@ import java.util.Hashtable;
     
     /* prints out the entire collection in an easy-to-read way (including checkout status) */
     public void printCollection(){
-      collection.entrySet().forEach( entry -> {
-      System.out.println( entry.getKey() + " ( " + entry.getValue() + " ) ");
-      });
+      Set<String> keys = this.collection.keySet();
+      for (String key: keys){
+        if(this.collection.get(key) == true){
+          System.out.println(key + " (Available)");
+        } else{
+          System.out.println(key + " (Not Available)");
+        }
+      }
     } 
   
     public static void main(String[] args){
